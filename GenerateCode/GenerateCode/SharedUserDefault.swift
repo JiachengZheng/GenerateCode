@@ -17,7 +17,10 @@ class SharedUserDefault: NSObject {
     
     fileprivate var _mapping: [String: String] = [:]
     var mapping: [String: String] {
-        return _mapping
+        if let map = UserDefaults(suiteName: SharedUserDefaultSuiteName)?.value(forKey: MappingKey) as? [String: String]{
+            return map
+        }
+        return [:]
     }
     
     private override init(){
